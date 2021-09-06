@@ -23,6 +23,17 @@ const ThoughtController = {
       .catch(err => res.json(err));
   },
 
+  getAllThoughts(req, res) {
+    Thought.find({})
+      .sort({ _id: -1 })
+      .then(dbUserData => res.json(dbUserData))
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      });
+    },
+  
+
   // add Reaction to Thought
   addReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
